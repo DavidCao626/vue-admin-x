@@ -57,28 +57,16 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/*--------------
-      Basic
----------------*/
-
 .ui.divider:not(.vertical):not(.horizontal) {
   border-top: 1px solid rgba(34, 36, 38, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-/*--------------
-    Coupling
----------------*/
 
 /* Allow divider between each column row */
 .ui.grid > .column + .divider,
 .ui.grid > .row > .column + .divider {
   left: auto;
 }
-
-/*--------------
-   Horizontal
----------------*/
 
 .ui.horizontal.divider {
   display: table;
@@ -103,10 +91,6 @@ export default {
 .ui.horizontal.divider:after {
   background-position: left 1em top 50%;
 }
-
-/*--------------
-    Vertical
----------------*/
 
 .ui.vertical.divider {
   position: absolute;
@@ -183,24 +167,12 @@ export default {
   }
 }
 
-/*--------------
-      Icon
----------------*/
-
 .ui.divider > .icon {
   margin: 0rem;
   font-size: 1rem;
   height: 1em;
   vertical-align: middle;
 }
-
-/*******************************
-          Variations
-*******************************/
-
-/*--------------
-    Hidden
----------------*/
 
 .ui.hidden.divider {
   border-color: transparent !important;
@@ -209,10 +181,6 @@ export default {
 .ui.hidden.divider:after {
   display: none;
 }
-
-/*--------------
-    Inverted
----------------*/
 
 .ui.divider.inverted,
 .ui.vertical.inverted.divider,
@@ -228,42 +196,22 @@ export default {
   border-right-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-/*--------------
-    Fitted
----------------*/
-
 .ui.fitted.divider {
   margin: 0em;
 }
 
-/*--------------
-    Clearing
----------------*/
-
 .ui.clearing.divider {
   clear: both;
 }
-
-/*--------------
-    Section
----------------*/
 
 .ui.section.divider {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-/*--------------
-     Sizes
----------------*/
-
 .ui.divider {
   font-size: 1rem;
 }
-
-/*******************************
-         Theme Overrides
-*******************************/
 
 .ui.horizontal.divider:before,
 .ui.horizontal.divider:after {
