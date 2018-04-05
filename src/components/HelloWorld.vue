@@ -97,6 +97,7 @@
 import Vue from 'vue'
 import items from './Items.vue'
 import item from './Item.vue'
+import CustomItems from './CustomItems.vue'
 import fieldset from './Fieldset.vue'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -129,7 +130,8 @@ export default {
   components: {
     'app-items': items,
     'app-items-item': item,
-    'app-fieldset': fieldset
+    'app-fieldset': fieldset,
+    'app-customItems': CustomItems
   }
 }
 </script>
