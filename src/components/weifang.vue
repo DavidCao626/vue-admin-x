@@ -36,6 +36,9 @@
   <div>
     <van-nav-bar title="危房改造" left-text="返回" right-text="我要上报" left-arrow @click-left="onClickLeft" @click-right="onClickRight" />
     <br/>
+    <van-popup v-model="show" position="right" :overlay="false">
+      内容
+    </van-popup>
     <van-cell-group>
       <van-cell icon="shop" @click="showCell">
         <template slot="title">
@@ -48,7 +51,7 @@
         <van-cell>
           <div class="card-demo-flex card-demo-content01">
             <div class="vux-1px-r">
-              <span>{{dilapiatedDatas.population}}</span> <br> 人口
+              <span>1</span> <br> 人口
             </div>
             <div class="vux-1px-r">
               <span>D4级</span> <br> 危险级别
@@ -71,90 +74,99 @@
       </div>
     </van-cell-group>
 
-    <br/>
-    <div class="aui-content">
+    <!-- <div class="aui-content">
       <ul class="aui-list aui-list-in ">
-        <li class="aui-list-header" style="color:#666; padding-left: 20px;width:90px;font-weight: 800;">
+        <li class="aui-list-header" style="color:#666; padding-left: 20px;width:90px;">
           2018
         </li>
       </ul>
-    </div>
+    </div>  -->
+    <van-tag mark style="    margin-bottom: 3px;">2018</van-tag>
     <van-tabs :swipeable='true'>
-      <van-tab v-for="(body,index) in hdlBodys" :title="body.createdTime" :key="index">
+      <van-tab v-for="(body,index) in hdlBodys" :key="index">
+        <div slot="title">
+          <template v-if='0'>
+            <div class="aui-dot">2018</div>
+          </template>
 
+          {{body.createdTime}}
+        </div>
         <div class="aui-content">
-          <ul class="aui-list aui-media-list">
-            <li class="aui-list-item ">
-              <div class="aui-media-list-item-inner">
-                <div class="aui-list-item-inner">
-                  <div class="aui-list-item-text">
-                    <div class="aui-list-item-title">情况描述</div>
-                    <div class="aui-list-item-right"></div>
-                  </div>
-                  <div class="aui-list-item-text aui-ellipsis-2">
-                    {{body.body1}}
+          <transition name="van-fade">
+            <ul class="aui-list aui-media-list">
+              <li class="aui-list-item ">
+                <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                      <div class="aui-list-item-title">情况描述</div>
+                      <div class="aui-list-item-right"></div>
+                    </div>
+                    <div class="aui-list-item-text aui-ellipsis-2">
+                      {{body.body1}}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
+              </li>
 
-            <li class="aui-list-item">
-              <div class="aui-media-list-item-inner">
+              <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">进度</div>
+                    <div class="aui-list-item-text">
+                    </div>
+                  </div>
+                  <div class="aui-progress aui-progress" style="margin:13px 25px 0px -30px">
+                    <div class="aui-progress-bar" style="width: 62%;background-color:#f74c31">62%</div>
+                  </div>
+                </div>
+              </li>
+              <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                  <div class="aui-list-item-title">进度</div>
-                  <div class="aui-list-item-text">
+                  <div class="aui-list-item-title">现场图片</div>
+                  <div class="aui-row aui-row-padded">
+                    <img v-for="(img,index) in body.imgs" :key="index" :src="img" @click="showImg(index,body.imgs)" style="width:32%; margin: 2px;" />
                   </div>
                 </div>
-                <div class="aui-progress aui-progress" style="margin:13px 25px 0px -30px">
-                  <div class="aui-progress-bar"  style="width: 60%;background-color:#f74c31">60%</div>
-                </div>
-              </div>
-            </li>
-            <li class="aui-list-item">
-              <div class="aui-list-item-inner">
-                <div class="aui-list-item-title">现场图片</div>
-                <div class="aui-row aui-row-padded">
-                  <img v-for="(img,index) in body.imgs" :key="index" :src="img" @click="showImg(index,body.imgs)" style="width:32%; margin: 2px;" />
-                </div>
-              </div>
-            </li>
-            <li class="aui-list-item ">
-              <div class="aui-media-list-item-inner">
-                <div class="aui-list-item-inner">
-                  <div class="aui-list-item-text">
-                    <div class="aui-list-item-title">存在问题</div>
-                    <div class="aui-list-item-right"></div>
-                  </div>
-                  <div class="aui-list-item-text aui-ellipsis-2">
-                    {{body.body3}}
+              </li>
+              <li class="aui-list-item ">
+                <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                      <div class="aui-list-item-title">存在问题</div>
+                      <div class="aui-list-item-right"></div>
+                    </div>
+                    <div class="aui-list-item-text aui-ellipsis-2">
+                      {{body.body3}}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-            <li class="aui-list-item ">
-              <div class="aui-media-list-item-inner">
-                <div class="aui-list-item-inner">
-                  <div class="aui-list-item-text">
-                    <div class="aui-list-item-title">整改意见</div>
-                    <div class="aui-list-item-right"></div>
-                  </div>
-                  <div class="aui-list-item-text aui-ellipsis-2 aui-padded-t-5 aui-padded-b-0">
+              </li>
+              <li class="aui-list-item ">
+                <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                      <div class="aui-list-item-title">整改意见</div>
+                      <div class="aui-list-item-right"></div>
+                    </div>
+                    <div class="aui-list-item-text aui-ellipsis-2 aui-padded-t-5 aui-padded-b-0">
 
-                    <div>
+                      <div>
 
-                      <div class="pl">
-                        章三：{{body.body4}}
-                      </div>
-                      <div class="pl">
-                        李四：评论评论
-                      </div>
-                      <div class="pl ">
-                        李四：评论评论
-                      </div>
+                        <div class="pl">
+                          <span style="color:#f74c31!important">章三：</span>{{body.body4}}
+                        </div>
+                        <div class="pl">
+                          <span style="color:#f74c31!important">李四：</span>评论评论
+                        </div>
+                        <div class="pl ">
+                          <span style="color:#f74c31!important">李四：</span>评论评论
+                        </div>
 
-                      <!-- <div class="aui-btn aui-btn-info aui-pull-right aui-margin-t-10" @click="showComm">
+                        <!-- <div class="aui-btn aui-btn-info aui-pull-right aui-margin-t-10" @click="showComm">
                         <span class="aui-iconfont aui-icon-edit"></span>填写意见</div> -->
-                      <div style="clear:both"></div>
+                        <div style="clear:both"></div>
+
+                      </div>
 
                     </div>
 
@@ -162,25 +174,26 @@
 
                 </div>
 
-              </div>
-
-            </li>
-            <li class="aui-list-item ">
-              <div class="aui-media-list-item-inner">
-                <div class="aui-list-item-inner">
-                  <textarea class="weui-textarea" placeholder="点击填写整改意见" rows="3"></textarea>
+              </li>
+              <li class="aui-list-item ">
+                <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                    <textarea class="weui-textarea" placeholder="点击填写整改意见" ref="input1" rows="3"></textarea>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li class="aui-list-item ">
-              <div class="aui-media-list-item-inner">
-                <div class="aui-list-item-inner">
-                  <button class="aui-btn aui-btn-info aui-btn-block aui-btn-sm" style="border-width:0px;background-color:#f74c31!important">发表意见</button>
+              </li>
+              <li class="aui-list-item ">
+                <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-inner">
+                    <!-- <button class="aui-btn aui-btn-info aui-btn-block aui-btn-sm" style="border-width:0px;background-color:#f74c31!important">发表意见</button> -->
+                    <van-button type="primary" @click="showComm" bottom-action>发表意见</van-button>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
 
+              </li>
+
+            </ul>
+          </transition>
         </div>
       </van-tab>
     </van-tabs>
@@ -194,6 +207,7 @@ var baseApi = "http://39.105.27.181:8080/bysj";
 export default {
   data: function() {
     return {
+      show: false,
       isshowComm: "aui-hide",
       cellshow1: true,
       activeNames: "1",
