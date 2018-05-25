@@ -4,7 +4,6 @@ import HelloWorld from '@/components/HelloWorld'
 import ok from '@/components/ok'
 import weifang from '@/components/weifang'
 import fenlei from '@/components/fenlei'
-import translate from '@/components/translate'
 Vue.use(Router)
 
 export default new Router({
@@ -28,11 +27,6 @@ export default new Router({
       path: '/fenlei',
       name: 'fenlei',
       component: fenlei
-    },
-    {
-      path: '/translate',
-      name: 'translate',
-      component: translate
     }
   ]
 })
